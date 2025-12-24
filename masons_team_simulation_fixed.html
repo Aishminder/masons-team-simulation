@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mason’s Team Simulation</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+button {
+  font-size: 18px;
+  padding: 15px 25px;
+  margin: 10px;
+  border-radius: 8px;
+  border: none;
+}
+#attack { background: #22c55e; }
+#defend { background: #eab308; }
+#miracle { background: #a855f7; color: white; }
+#log { margin-top: 20px; }
+</style>
+</head>
+
+<body>
+
+<h1>🏆 Mason’s Team Simulation 🏆</h1>
+
+<p><b>Score</b></p>
+<p>Mason: <span id="mason">0</span> | Aishminder: <span id="aish">1</span></p>
+
+<button id="attack">Attack</button>
+<button id="defend">Defend</button>
+<button id="miracle">✨ Miracle Play</button>
+
+<div id="log">The match begins…</div>
+
+<script>
+let mason = 0;
+let aish = 1;
+let round = 0;
+
+function play(move) {
+  if (round >= 10) {
+    document.getElementById("log").innerText = "🏁 Match over. Refresh to play again.";
+    return;
+  }
+
+  round++;
+  let masonRoll = Math.random() * 100;
+  let aishRoll = Math.random() * 70;
+
+  if (move === "miracle") {
+    aishRoll += 40;
+  }
+
+  if (masonRoll > aishRoll) {
+    mason++;
+    document.getElementById("log").innerText =
+      "Round " + round + ": Mason’s Team overpowers the play.";
+  } else {
+    aish++;
+    document.getElementById("log").innerText =
+      "Round " + round + ": Aishminder’s Team pulls off a MIRACLE!";
+  }
+
+  document.getElementById("mason").innerText = mason;
+  document.getElementById("aish").innerText = aish;
+}
+
+document.getElementById("attack").onclick = function() { play("attack"); };
+document.getElementById("defend").onclick = function() { play("defend"); };
+document.getElementById("miracle").onclick = function() { play("miracle"); };
+</script>
+
+</body>
+</html>
